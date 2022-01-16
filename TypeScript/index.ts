@@ -9,6 +9,7 @@ function sum(a: number, b: number) {
 sum(2, 2);
 
 // Interfaces
+
 interface IAnimal {
     name: string,
     type: 'terrestrial' | 'aquatic'
@@ -24,6 +25,10 @@ interface IFeline extends IAnimal {
     roar(level: number): void
 };
 
+interface ICanine extends IAnimal {
+    isFriendly: boolean
+}
+
 const feline: IFeline = {
     name:'Leão',
     type: 'terrestrial',
@@ -33,3 +38,13 @@ const feline: IFeline = {
 }
 
 feline.roar(10);
+
+// type
+
+type IDomestic = IFeline | ICanine; // can join too: &
+
+const animal2: IDomestic = {
+    name: 'Cachorro',
+    type: 'terrestrial',
+    isFriendly: true
+}
