@@ -6,7 +6,15 @@ const App = () => {
         <>
             <h1>Hello World!</h1>
             <ul>
-                <Item texto="Item 1"/>
+                <Item>
+                    Item 1
+                </Item>
+                <Item>
+                    Item 2
+                </Item>
+                <Item>
+                    Item 3
+                </Item>
             </ul>
             <div className="card">
                 <div className="card-body">
