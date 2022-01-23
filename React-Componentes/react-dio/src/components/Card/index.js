@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button";
 
 const Card = () => {
 
@@ -22,8 +23,16 @@ const Card = () => {
                 <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card's content.
                 </p>
-                <button type="button" class="btn btn-success" onClick={Adicionar}>Adicionar</button>
-                <button type="button" class="btn btn-danger" onClick={Remover}>Remover</button>
+                <Button
+                className="btn btn-success"
+                onClick={Adicionar}>
+                    Adicionar
+                </Button>
+                <Button
+                className="btn btn-danger"
+                onClick={Remover}>
+                    Remover
+                </Button>
                 <p>{valor}</p>
             </div>
         </div>
