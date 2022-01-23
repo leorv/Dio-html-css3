@@ -2,7 +2,7 @@ import './styles.css';
 
 // Uma maneira de criar estilo
 const divStyle = {
-    color: blue;
+    color: blue,
     backgroundImage: 'url(' + imgUrl + ')'
 };
 function HelloWorldComponent() {
