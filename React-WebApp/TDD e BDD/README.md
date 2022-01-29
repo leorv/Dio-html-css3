@@ -253,3 +253,98 @@ defineFeature(feature, test => {
     });
 });
 ```
+
+## Debbuging
+
+> Depuração é o processo de encontrar e reduzir defeitos em um software.
+
+Ferramentas:
+
+- Chrome Devtools
+- Redux Devtools
+- React Devtools
+- Audits
+
+## Tratamento de erros
+
+- Resiliência de SW
+- Segurança
+
+### Tratamento em funções
+
+```
+export const soma = (a, b) => a + b;
+```
+A função acima não possui nenhum tipo de tratamento.
+
+Uma das formas de fazer isso seria:
+
+```
+export const somaSegura = (a, b) => {
+    if (typeOf a === number && typeOf b === number) {
+        return a + b;
+    } else {
+        // vamos convencionar -1 quando a soma for inválida.
+        return -1;
+    }
+}
+```
+
+### Tratamento em forms
+
+```
+<form onSubmit={this.handleSubmit} style={{display: 'flex', flexDirection: 'column'}}>
+    <label>
+        Nome:
+        <input type="text" value={this.state.value} onChange={this.handleChange} required />
+    </label>
+    <input type="submit" value="submit" />
+</form>
+```
+
+### Tratamento de retorno em APIs
+
+```
+export const fetchCientistas = () => {
+    fetch('https://react-intermediario-dio.free.beeceptor.com/cientistas-brasileiras')
+        .then(response => response.json())
+        .then(data => {
+            setCientistas(data);
+        })
+        .catch(error => {
+            exibirMensagem(error.code);
+        });
+}
+```
+
+```
+function exibirMensagem(codigo) {
+    if(codigo == 401) {
+        alert('Faça login para continuar.');
+    }
+    if(codigo == 404) {
+        alert('Recurso não encontrado.');
+    }
+    if(codigo == 500) {
+        alert('Erro interno do servidor.');
+    }
+}
+```
+
+### Tratamento de erros em componentes
+
+- Em JS usamos PropTypes.
+- Podemos usar linguagens tipadas como TypeScript, definindo interfaces.
+
+```
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export const Basic = ({ name }) => {
+    <p>Meu nome é { name }</p>
+}
+
+Basic.propTypes = {
+    name: PropTypes.string
+}
+```
