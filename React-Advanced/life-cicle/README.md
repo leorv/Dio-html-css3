@@ -35,3 +35,9 @@
 ## Desmontagem
 
 componentWillUmount
+
+## pouco utilizados
+
+- getDerivedStateFromProps
+- getSnapshotBeforeUpdate
+
