@@ -1,6 +1,7 @@
-const input = document.getElementById('input') as HTMLInputElement;
+// Generic types
 
-input.addEventListener('input',(event) => {
-    const i = event.currentTarget as HTMLInputElement;
-    console.log(i.value);
-})
+function AdicionaALista(array, value) {
+    return array.map(item => item + value);
+}
+
+AdicionaALista([1,2,3],1);
