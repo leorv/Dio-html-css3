@@ -116,3 +116,10 @@ Caso você tenha experiências ao utilizar esse banco de dados no Linux, nos con
 ## Post original
 
 https://www.vivaolinux.com.br/artigo/Instalar-o-Microsoft-SQL-Server-no-Debian-e-no-Ubuntu
+
+## Plus: Conectando um Windows neste servidor Linux
+
+No Windows, utilizando o SQL Server Management Studio:
+
+Nome do servidor: o IP, por exemplo: 192.168.1.100
+Autenticação: Autenticação do SQL Server, usuário e senha. Normalmente usuário é SA e a senha é a que você definiu.
