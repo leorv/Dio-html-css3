@@ -122,3 +122,45 @@ Vai rodar todos os comandos dentro do arquivo.
 
 Link útil de verdade:
 https://learn.microsoft.com/pt-br/sql/ssms/scripting/sqlcmd-use-the-utility?view=sql-server-ver16
+
+## Alterando configurações do servidor
+
+### Exibir propriedades do servidor
+
+Este exemplo consulta a exibição de catálogo sys.servers para retornar o nome (name) e a ID (server_id) do servidor atual e o nome do provedor OLE DB (provider) para conectar a um servidor vinculado.
+
+```
+USE AdventureWorks2012;   
+GO  
+SELECT name, server_id, provider  
+FROM sys.servers ;   
+GO
+```
+
+### Exibir propriedades de servidor usando a exibição do catálogo sys.configurations
+
+Este exemplo consulta a exibição do catálogo sys.configurations para retornar informações sobre cada opção de configuração de servidor no servidor atual. O exemplo retorna o nome (name) e a descrição (description) da opção, o valor dela (value) e se ela é uma opção avançada (is_advanced).
+
+```
+SELECT name, description, value, is_advanced  
+FROM sys.configurations;   
+GO
+```
+
+### Alterar uma propriedade do servidor usando storage procedure
+
+Este exemplo mostra como usar sp_configure para alterar a propriedade de um servidor. O exemplo altera o valor da opção fill factor para 100. O servidor deve ser reiniciado para que a alteração entre em vigor.
+
+```
+sp_configure 'show advanced options', 1;  
+GO  
+RECONFIGURE;  
+GO  
+sp_configure 'fill factor', 100;  
+GO  
+RECONFIGURE;  
+GO
+```
+
+Mais informações: https://learn.microsoft.com/pt-br/sql/database-engine/configure-windows/server-configuration-options-sql-server?view=sql-server-ver16
+
