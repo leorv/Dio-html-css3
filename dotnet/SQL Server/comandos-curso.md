@@ -172,6 +172,8 @@ https://www.w3schools.com/sql/sql_datatypes.asp
 
 ## Manipulando dados
 
+Built in Functions
+
 ### COUNT
 
 Conta a quantidade de linhas de uma tabela, com uma determinada condição.
@@ -410,3 +412,145 @@ WHERE C.Id = 4
 ```
 
 ![Joins do SQL](SQL_Joins.png)
+
+## CONSTRAINT
+
+Constraints são regras que devem ser seguidas para permitir a inserção em uma tabela.
+
+- NOT NULL -> Não permite valor nulo.
+- UNIQUE -> Valor único em toda tabela.
+- CHECK - Garante uma determinada condição.
+- DEFAULT - Valor padrão para inserção.
+- PRIMARY KEY - É uma combinação de NOT NULL e UNIQUE.
+- FOREIGN KEY - Garante que um registro exista em outra tabela.
+
+### UNIQUE
+
+Para alterar uma coluna para ser única.
+
+```
+ALTER TABLE Produtos
+ADD UNIQUE(Nome)
+```
+
+### CHECK
+
+Verifica uma determinada condição. Por exemplo, para aceitar somente valores que eu desejo.
+
+Dando um nome também para essa constraint, pra ficar melhor.
+
+```
+ALTER TABLE Produtos
+ADD CONSTRAINT CHK_ColunaGenero CHECK(Genero = 'U' OR Genero = 'M' OR Genero = 'F')
+```
+
+
+### DEFAULT
+
+```
+ALTER TABLE Produtos
+ADD DEFAULT GETDATE() FOR DataCadastro
+```
+
+### Apagando uma constraint
+
+```
+ALTER TABLE Produtos
+DROP CONSTRAINT UQ__Produtos__7D8FE3B2D9894E32
+```
+
+## Storage Procedures
+
+São códigos SQL que você pode salvar diretamente no banco de dados, permitindo assim aproveitar um script comumente usado.
+
+```
+CREATE PROCEDURE InserirNovoProduto
+    @Nome varchar(255),
+    @Cor varchar(255),
+    @Preco decimal,
+    @Tamanho varchar(5),
+    @Genero char(1)
+AS
+INSERT INTO Produtos (Nome, Cor, Preco, Tamanho, Genero)
+VALUES (@Nome, @Cor, @Preco, @Tamanho, @Genero)
+```
+
+Aonde ela fica?
+Programmability -> Stored Procedures
+
+### Chamando a storage procedure
+
+```
+EXECUTE InserirNovoProduto
+    'Novo Produto',
+    'Colorido',
+    50,
+    'G',
+    'U'
+```
+
+Pode usar também somente EXEC.
+
+Também executar de outra forma, passando os nomes dos campos:
+
+```
+EXEC InserirNovoProduto
+@Nome = 'Novo Produto',
+@Cor = 'Colorido',
+@Preco = 50,
+@Tamanho = 'G',
+@Genero = 'U'
+```
+
+### Procedure com Select
+
+```
+CREATE PROCEDURE ObterProdutosPorTamanho
+@TamanhoProduto VARCHAR(5)
+AS
+SELECT * FROM Produtos WHERE Tamanho = @TamanhoProduto
+```
+
+Sem parâmetros:
+
+```
+CREATE PROCEDURE ObterTodosProdutos
+AS
+SELECT * FROM Produtos
+```
+
+## Functions
+
+Functions sempre tem que dar um retorno.
+
+São códigos SQL que você pode salvar diretamente no banco de dados, semelhante a uma procedure, mas com usos específicos e limitações, como por exemplo, devem sempre ter um retorno e aceita apenas parâmetros de entrada.
+
+Se eu quero dar um desconto no preço:
+
+```
+SELECT 
+    Nome,
+    Preco,
+    FORMAT(Preco - Preco / 100 * 10, 'N2') PrecoComDesconto
+FROM Produtos WHERE Tamanho = 'M'
+```
+
+Isso acima é sem usar function. Mas é meio grande né. Poderia ser algo que teríamos que fazer com frequência.
+
+Usando function:
+
+```
+CREATE FUNCTION CalcularDesconto(@Preco DECIMAL(13,2), @Porcentagem INT)
+RETURNS DECIMAL(13,2)
+BEGIN
+    RETURN @Preco - @Preco / 100 * @Porcentagem
+END
+```
+
+```
+SELECT 
+    Nome,
+    Preco,
+    dbo.CalcularDesconto(Preco, 10) PrecoComDesconto
+FROM Produtos WHERE Tamanho = 'M'
+```
