@@ -4,26 +4,34 @@ Sempre ao final dos comandos, deve-se dar o comando GO.
 
 ## Comandos mais simples
 
-Mostrar os bancos de dados:
+### Mostrar os bancos de dados
 
 ```
 select name from sys.databases;
 go
 ```
 
-Criando um banco de dados:
+### Criando um banco de dados
 
 ```
 create database db_teste;
 ```
 
-Definir o banco de dados para trabalho:
+### Definir o banco de dados para trabalho
 
 ```
 use db_teste;
 ```
 
-Criar tabela:
+### Mostrar as tabelas
+
+```
+SELECT table_name, table_schema, table_type
+FROM information_schema.tables
+ORDER BY table_name ASC;
+```
+
+### Criar tabela
 
 ```
 create table tbl_teste (
@@ -33,7 +41,7 @@ create table tbl_teste (
 go
 ```
 
-Inserindo dados:
+### Inserindo dados
 
 ```
 insert into tbl_teste(id, nome) values(5, "Fábio");
