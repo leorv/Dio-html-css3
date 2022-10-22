@@ -1,6 +1,14 @@
+using WebAPI.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<AgendaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoPadrao")));
+// Poderia fazer de outra forma também:
+// options.UseSqlServer("Server=localhost\\sqlexpress;Initial Catalog=Agenda; Integrated Security=True"));
+// Mas é muito ruim isso, é hard coded. Melhor armazenar a configuração no arquivo json.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
