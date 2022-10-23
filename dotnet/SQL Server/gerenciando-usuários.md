@@ -100,4 +100,6 @@ Exemplo:
 GRANT SELECT, INSERT, UPDATE, ALTER, DELETE TO Manager;
 ```
 
+## Links
 
+https://blog.devart.com/create-login-user-and-grant-permission-sql-server.html#create_new_login
