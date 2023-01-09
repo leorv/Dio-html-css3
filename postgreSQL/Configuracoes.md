@@ -29,7 +29,7 @@ No sistema operacional Ubuntu, se o PostgreSQL foi instalado a partir do reposit
 
 `/etc/postgresql/[versão]/[nome do cluster]/postgresql.conf`
 
-## Algumas configurações interessantes
+## Algumas configurações interessantes do arquivo postgresql.conf
 
 ### Configurações de conexão
 
@@ -113,68 +113,3 @@ Localizado no diretório de dados PGDATA de sua instalação.
 
 A opção ident deve ser utilizada no arquivo pg_hba.conf
 
-## Comandos administrativos
-
-### Ubuntu
-
-- pg_lsclusters
-
-Lista todos os clusters PostgreSQL.
-
-- pg_createcluster <version> <clustername>
-
-Cria um novo cluster PostgreSQL.
-
-- pg_dropcluster <version> <cluster>
-
-Apaga um cluster PostgreSQL.
-
-- pg_ctlcluster <version> <cluster> <action>
-
-Start, Stop, Status, Restart de clusters PostgreSQL.
-
-### CentOS
-
-- systemctl <action> <cluster>
-	- systemctl start postgresql-11
-
-(start, status, stop, restart)
-
-### No Windows
-
-Abrir o services. Identificar a linha em que se encontra o serviço do PostgreSQL.
-
-Clicar com o botão direito e observar os comando que pode executar.
-
-## binários do postgreSQL
-
-Mas eu compilei o postgreSQL, ok:
-
-Então se você compilou, você vai ter que administrar seu postgreSQL a partir dos binários dele.
-
-- createdb
-- createuser
-- dropdb
-- dropuser
-- initdb
-- pg_ctl (start, stop, restart, status)
-- pg_basebackup
-- pg_dump / pg_dumpall
-- pg_restore
-- psql
-- reindexdb
-- vacuumdb
-
-Embora algumas bibliografias falam isso, dump não é backup. Ok.
-
-## Cluster
-
-Coleção de bancos de dados que compartilham as mesmas configurações (arquivos de configuração) do PostgreSQL e do sistema operacional (porta, listen_address, etc).
-
-## Banco de dados (database)
-
-Conjunto de schemas com seus objetos/relações (tabelas, funções, views, etc).
-
-Cuidado, no mySQL, schema é o mesmo que database, no PostgreSQL, não.
-
-Dentro de um database, eu posso ter mais de um schema.

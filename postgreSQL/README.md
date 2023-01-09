@@ -78,3 +78,24 @@ Modelo cliente-servidor.
 - Consultas complexas e Common table expressions (CTE)
 - Suporte a dados geográficos (PostGIS)
 - Controle de concorrência multi-versão.
+
+## Cluster
+
+Coleção de bancos de dados que compartilham as mesmas configurações (arquivos de configuração) do PostgreSQL e do sistema operacional (porta, listen_address, etc).
+
+## Banco de dados (database)
+
+Conjunto de schemas com seus objetos/relações (tabelas, funções, views, etc).
+
+Cuidado, no mySQL, schema é o mesmo que database, no PostgreSQL, não.
+
+Dentro de um database, eu posso ter mais de um schema.
+
+## Schema
+
+Conjunto de objetos/relações (tabelas, funções, views, etc.).
+
+Outros bancos interpretam o Schema como um banco de dados, mas no postgres é diferente.
+
+Por exemplo, dentro de um Cluster, temos vários bancos de dados, e em um determinado banco de dados, digamos, o DB4, temos dois esquemas, um SCHEMA=PUBLIC e um outro sendo SCHEMA=PRODUCT. Cada um com suas tabelas e views.
+
