@@ -70,6 +70,10 @@ CREATE ROLE alunos
     CONNECTION LIMIT 90;
 ```
 
+```
+CREATE ROLE daniel LOGIN PASSWORD '123' IN ROLE professores;
+```
+
 ## Associação entre roles
 
 Quando uma role assume permissões de outras roles, necessário a opção INHERIT.
@@ -132,5 +136,108 @@ DROP ROLE role_especification;
 
 ```
 DROP ROLE daniel
+```
+
+## Listar roles criadas
+
+comando: `\du`
+
+Ou usando um código específico:
+
+```
+SELECT * FROM pg_roles;
+```
+
+## Administrando os acessos
+
+GRANT &rarr; São os privilégios de acesso aos bancos de dados.
+
+Privilégios:
+
+- tabela
+- coluna
+- sequence
+- database
+- domain
+- foreign data wrapper
+- foreign server
+- function
+- language
+- large select
+- schema
+- tablespace
+- type
+
+### Databases
+
+```
+GRANT {{CREATE | CONNECT | TEMPORARY | TEMP} [...] | ALL [PRIVILEGES]}
+    ON DATABASE database_name [...]
+    TO role_specification [...] [WITH GRANT OPTION]
+```
+
+### Schemas
+
+```
+GRANT {{CREATE | USAGE} [...] | ALL [PRIVILEGES]}
+    ON SCHEMA schema_name [...]
+    TO role_specification [...] [WITH GRANT OPTION]
+```
+
+### Table
+
+```
+GRANT {{SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER} [...] | ALL [PRIVILEGES]}
+    ON {[TABLE] table_name [...]
+        | ALL TABLES IN SCHEMA schema_name [...]}
+    TO role_specification [...] [WITH GRANT OPTION]
+```
+
+## Revogar privilégios REVOKE
+
+Retira as permissões da role.
+
+### Database
+
+```
+REVOKE [GRANT OPTION FOR]
+    {{CREATE | CONNECT | TEMPORARY | TEMP} [...] [PRIVILEGES]}
+    ON DATABASE database_name [...]
+    FROM {[GROUP] role_name | PUBLIC} [...]
+    [CASCADE | RESTRICT]
+```
+
+### Schema
+
+```
+REVOKE [GRANT OPTION FOR]
+    {{CREATE | USAGE} [...] | ALL [PRIVILEGES]}
+    ON SCHEMA schema_name [...]
+    FROM {[GROUP] role_name | PUBLIC} [...]
+    [CASCADE | RESTRICT]
+```
+
+### Table
+
+```
+REVOKE [GRANT OPTION FOR]
+    {{SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER}
+    [...] | ALL [PRIVILEGES]}
+    ON {[TABLE] table_name [...]
+        | ALL TABLES IN SCHEMA schema_name [...]}
+    FROM {[GROUP] role_name | PUBLIC} [...]
+    [CASCADE | RESTRICT]
+```
+
+## Simplificações
+
+Revogando todas as permissões:
+
+```
+REVOKE ALL ON ALL TABLES IN SCHEMA [schema] FROM [role];
+
+REVOKE ALL ON SCHEMA [schema] FROM [role];
+
+REVOKE ALL ON DATABASE [database] FROM [role];
 ```
 
