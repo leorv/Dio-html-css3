@@ -25,6 +25,8 @@ SELECT AVG(valor) FROM cliente_transacoes;
 ```
 SELECT COUNT(numero) FROM cliente;
 
+SELECT COUNT(1) from agencia;
+
 SELECT COUNT(numero), email
 FROM cliente
 WHERE email ILIKE '%gmail.com'
