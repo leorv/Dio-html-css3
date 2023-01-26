@@ -153,15 +153,19 @@ LANGUAGE PLPGSQL
 AS $$
 DECLARE variavel_id INTEGER;
 BEGIN
-    SELECT INTO variavel_id numero FROM banco WHERE nome = p_nome;
+    IF p_numero IS NULL OR p_nome IS NULL OR p_ativo IS NULL THEN
+        RETURN 0
+    END IF;
+
+    SELECT INTO variavel_id numero FROM banco WHERE numero = p_numero;
 
     IF variavel_id IS NULL THEN
         INSERT INTO banco(numero, nome, ativo) VALUES(p_numero, p_nome, p_ativo);
     ELSE
-        RETURN FALSE;
+        RETURN variavel_id;
     END IF;
 
-    SELECT INTO variavel_id numero FROM banco WHERE nome = p_nome;
+    SELECT INTO variavel_id numero FROM banco WHERE numero = p_numero;
 
     IF variavel_id IS NULL THEN
         RETURN FALSE;
@@ -171,3 +175,14 @@ BEGIN
 END; $$;
 
 SELECT banco_add(13, 'Banco Doido', true);
+```
+
+### COALESCE
+
+Comando útil para retornar o primeiro item não nulo.
+
+```
+SELECT COALESCE(null, null, 'leonardo', 'digital');
+
+retorna: leonardo
+```
