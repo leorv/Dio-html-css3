@@ -1,5 +1,9 @@
 # Maven
 
+- Endereça como o software foi construído e suas dependências através do POM (Project Object Model).
+- Facilita a compreensão do desenvolvedor.
+- Fornecer informações de qualidade.
+
 ## Introdução
 
 Criando um novo projeto
@@ -39,3 +43,15 @@ Vai criar o jar da aplicação, em target.
 > mvn clean
 
 A pasta target será apagada.
+
+## Criando diferentes tipos de projetos
+
+É possível com o Maven archetype, um template, e neste arquivo definimos versão de componentes, organização de pacotes e arquivos, etc.
+
+Dessa forma conseguimos construir diversos templates ou arquétipos para diferentes finalidades.
+
+Podemos buscar na web esses arquétipos também.
+
+Pesquisar, por exemplo: `maven archetype list`.
+
+
